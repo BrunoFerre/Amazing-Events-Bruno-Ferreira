@@ -41,6 +41,47 @@
     </nav>
   </header>
   <main class="d-flex align-items-center justify-content-center flex-wrap gap-3 p-1" id="main-details">
+    <div id="carouselExample" class="col-lg col-xl col-xxl carousel slide mb-4 ">
+      <div class="carousel-inner">
+        <div class="carousel-item active ">
+          <img src="./../images/optional_banner_1.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./../images/optional_banner_2.jpg" class="d-block w-100 position-relative bottom-50" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./../images/optional_banner_3.jpg" class="d-block w-100 position position-relative bottom-50" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./../images/optional_banner_4.jpg" class="d-block w-100 position-relative bottom-50" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./../images/optional_banner_5.jpg" class="d-block w-100 position-relative bottom-50" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="container-fluid d-flex align-items-center justify-content-center gap-3 flex-wrap">
+      <input type="checkbox" class="btn-check" name="options" id="option1" >
+      <label class="btn btn-success" for="option1">Category</label>
+
+      <input type="checkbox" class="btn-check " name="options" id="option2" >
+      <label class="btn btn-success" for="option2">Category</label>
+
+      <input type="checkbox" class="btn-check" name="options" id="option3" >
+      <label class="btn btn-success" for="option3">Category</label>
+
+      <input type="checkbox" class="btn-check" name="options" id="option4" >
+      <label class="btn btn-success" for="option4">Category</label>
+      <input class="form-control w-25" type="text" placeholder="Search " id="search" aria-label="readonly input example" >
+    </div>
     <section class="d-flex gap-3 w-75 flex-wrap justify-content-center" id="sections">
       <img src="./../images/costume_party.jpg" alt="Cinena" class="img-thumbnail w-50">
       <article class="col d-flex flex-column justify-content-center align-items-center gap-3 m-2">
@@ -50,63 +91,9 @@
         <p>Place: Room C</p>
       </article>
     </section>
-    <section class="d-flex gap-3 w-75 flex-wrap justify-content-center" id="sections">
-      <img src="./../images/music_concert.jpg" alt="Cinena" class="img-thumbnail w-50">
-      <article class="d-flex flex-column align-items-center gap-3 m-2 col">
-        <h3>Metallica in Concert</h3>
-        <p>Date:2024-01-22</p>
-        <p>Category:Music Concert</p>
-        <p>Place:Room A</p>
-      </article>
-    </section>
-    <section class="d-flex gap-3 w-75 flex-wrap  justify-content-center" id="sections">
-      <img src="./../images/cinema.jpg" alt="Cinena" class="img-thumbnail w-50">
-      <article class="d-flex flex-column align-items-center gap-3 m-2 col">
-        <h3>Avengers</h3>
-        <p>Date:2023-10-15</p>
-        <p>Category:Let's go to the cinema</p>
-        <p>Place:Room D1</p>
-      </article>
-    </section>
-    <section class="d-flex gap-3 w-75 flex-wrap justify-content-center" id="sections">
-      <img src="./../images/food_fair.jpg" alt="Cinena" class="img-thumbnail w-50">
-      <article class="d-flex flex-column align-items-center gap-3 m-2 col">
-        <h3>Feestival of the <br> Collectivities</h3>
-        <p>Date:2022-12-12</p>
-        <p>Category:Food Fair</p>
-        <p>Place:Room A</p>
-      </article>
-    </section>
-    <section class="d-flex gap-3 w-75 flex-wrap justify-content-center" id="sections">
-      <img src="./../images/books.jpg" alt="Cinena" class="img-thumbnail w-50">
-      <article class="d-flex flex-column align-items-center gap-3 m-2 col">
-        <h3>School Book Fair</h3>
-        <p>Date:2022-10-15</p>
-        <p>Category:Book Exchange</p>
-        <p>Place:Room D1</p>
-      </article>
-    </section>
-    <section class="d-flex gap-3 w-75 flex-wrap  justify-content-center" id="sections">
-      <img src="./../images/outing_to_the_museum.jpg" alt="Cinena" class="img-thumbnail w-50">
-      <article class="d-flex flex-column align-items-center gap-3 m-2 col">
-        <h3>Art Exhibicion</h3>
-        <p>Date:2022-11-02</p>
-        <p>Category:Museum</p>
-        <p>Place:Field </p>
-      </article>
-    </section>
-    <section class="d-flex gap-3 w-75 flex-wrap justify-content-center" id="sections">
-      <img src="./../images/marathon.jpg" alt="Cinena" class="img-thumbnail w-50">
-      <article class="d-flex flex-column align-items-center gap-3 m-2 col">
-        <h3>10K for life</h3>
-        <p>Date:2022-03-01</p>
-        <p>Category:Race</p>
-        <p>Place:Soccer Field</p>
-      </article>
-    </section>
   </main>
   <footer class="d-flex justify-content-between  container-fluid">
-    <div class="d-flex align-items-center container">
+    <div class="d-flex align-items-center container" id="social">
       <a href="#"><img src="./../images/facebook.png" class="rounded-3 p-1" alt="facebok" width="60"></a>
       <a href="#"><img src="./../images/instagram.png" class="rounded-3 p-1" alt="instagram" width="60"></a>
       <a href="#"><img src="./../images/whatsapp.png" class="rounded-3 p-1" alt="whatsapp" width="60"></a>

@@ -66,9 +66,6 @@ footer{
     min-height: 5vh;
     background-color: darkorchid;
 }
-/* #sections{
-    height: 20rem;
-} */
 
 #main-details{
     background-color: lightseagreen;
@@ -79,10 +76,17 @@ footer{
         flex-direction: column;
     }
     header>img{
-        height: 5rem;
+        height: 2rem;
         width: 100%;
     }
     #carouselExample{
         display: none;
+    }
+    #sections{
+        align-items: center;
+        flex-direction: column;
+    }
+    #search{
+        width: 80% !important;
     }
 }
