@@ -1,4 +1,4 @@
-const containerPast = document.getElementById("past")
+const containerUpcoming = document.getElementById("past")
 const eventsArray = data.events
 const date = data.currentDate
 let categoriasRepetidas = eventsArray.map(eventos => eventos.category)
@@ -6,7 +6,7 @@ let categoriasNoRepeat = Array.from(new Set(categoriasRepetidas))
 
 function crearInputs(categorias) {
   return `<label class="btn btn-success">${categorias}
-  <input type="checkbox" class="" onchange="filtroCheck()"  name="options" id="${categorias}" value="${categorias}"></label>`
+  <input type="checkbox" class=""  name="options" id="${categorias}" value="${categorias}"></label>`
 }
 function pintarInputs(array, lugar) {
   for (let categorias of array) {
@@ -25,7 +25,7 @@ function crearCards(elemento) {
        <a href="../pages/details.html?id=${elemento._id}" class=" btn btn-primary">Details</a>
      </div>
    </div>
- </div>`
+ </div> ` 
 }
 
 function pintarCards(array,date,container) {
@@ -38,7 +38,10 @@ function pintarCards(array,date,container) {
 const inputsCheck = document.getElementById('inputs')
 
 pintarInputs(categoriasNoRepeat,inputsCheck)
-pintarCards(eventsArray, date, containerPast)
+pintarCards(eventsArray, date, containerUpcoming)
+
+
+const searchInput = document.getElementById("search")
 
 function mostrarValor(input) {
   let valorSearch = input.value.toLowerCase()
@@ -46,32 +49,28 @@ function mostrarValor(input) {
   return valorSearch
 }
 
-const searchInput = document.getElementById("search")
-
-searchInput.addEventListener('keyup', () => {
-  containerPast.innerHTML=''
-  let value = mostrarValor(searchInput)
-  let evento = eventsArray.filter(event => event.name.toLowerCase().includes(value))
-  pintarCards(evento,date,containerPast)
+inputsCheck.addEventListener("change", () => {
+  containerUpcoming.innerHTML = ''
+  filtroCheck(eventsArray,containerUpcoming)
 })
 
+searchInput.addEventListener('keyup', () => {
+  containerUpcoming.innerHTML = ''
+  let value = mostrarValor(searchInput)
+  console.log(value)
+  let evento = eventsArray.filter(event => event.name.toLowerCase().includes(value))
+  pintarCards(evento,date,containerUpcoming)
+})
 
-function filtroInput() {
-  containerPast.innerHTML=''
-  const search = searchInput.value.toLowerCase()
-  let primerFiltro = eventsArray.filter(event => event.description.toLowerCase().includes(search))
-  pintarCards(primerFiltro,date,containerPast)
-  return primerFiltro
-} 
-function filtroCheck() {
-  containerPast.innerHTML=''
+function filtroCheck(array,ubicacionHTML) {
+  ubicacionHTML.innerHTML=''
   let catFiltro = []
-  let checkSeleccionado = document.querySelectorAll('input[type="checkbox"]:checked');
+  let checkSeleccionado = document.querySelectorAll('input[type="checkbox"]:checked')
   checkSeleccionado.forEach(function(inputs) {
   catFiltro.push(inputs.value)
+  console.log(catFiltro);
  })
-  let segundofiltro = eventsArray.filter(event =>catFiltro.includes(event.category)||catFiltro.length == 0)
-  pintarCards(segundofiltro,date,containerPast)
+  let segundofiltro = array.filter(event =>catFiltro.includes(event.category)||catFiltro.length == 0)
+  pintarCards(segundofiltro,date,ubicacionHTML)
   return segundofiltro
-}
- 
+} 
