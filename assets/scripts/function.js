@@ -1,13 +1,12 @@
-const container = document.getElementById('upcoming')
+const container = document.getElementById('container')
 const htmlChecks = document.getElementById('inputCont')
 fetch('https://mindhub-xj03.onrender.com/api/amazing')
     .then(resonse=> resonse.json())
     .then(dataApis => {
-      let events = dataApis.events
-      const date= dataApis.currentDate
+        let events = dataApis.events
         let repeatCategories = events.map(event => event.category)
         let categories = Array.from(new Set(repeatCategories))
-        showCards(events,date, container)
+        showCards(events, container)
         showCheckBoxs(categories, htmlChecks)
         const searchInput = document.getElementById("search")
 
@@ -21,7 +20,7 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
                 console.log(catFiltro);
                })
             let filter = filterCrossed(events, catFiltro, searchInput.value)
-            showCards(filter,date,container)
+            showCards(filter,container)
         })
         searchInput.addEventListener('keyup', () => {
              container.innerHTML = ''
@@ -31,7 +30,7 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
                )
             let filter = filterCrossed(events, catFiltro, searchInput.value)
             console.log(searchInput.value);
-            showCards(filter,date,container)
+            showCards(filter,container)
         })
     })
 
@@ -45,21 +44,19 @@ function cards(event) {
       </div>
         <div class='card-footer d-flex justify-content-around align-items-center p-2'>
         <p>Price: ${event.price}</p>
-          <a href="../pages/detail.html?id=${event._id}" class="btn btn-primary ">Details</a>
+          <a href="./../pages/detail.html?id=${event._id}" class="btn btn-primary ">Details</a>
         </div>
     </div>'`
   }  
-function showCards(arrayEvent,date, htmlContainer) {
+function showCards(arrayEvent,htmlContainer) {
     let card = ''
     if (arrayEvent == '') {
         card += `<p class='display-1'> ERROR IN FILTER</p>`
         htmlContainer.innerHTML= card
     } else {
         htmlContainer.innerHTML += ''
-      for (const event of arrayEvent) {
-        if (event.date >= date) {
-          htmlContainer.innerHTML += cards(event)
-        }
+        for (const event of arrayEvent) {
+            htmlContainer.innerHTML += cards(event)
         }
     }
 }

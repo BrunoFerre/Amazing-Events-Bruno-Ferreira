@@ -8,8 +8,8 @@ body{
     max-width: 100vw;
 }
 .card{
-    width: 32rem !important;
-    height: 30rem;
+    width: 30rem !important;
+    height: 31rem;
 }
 .card-img-top{
     height: 20rem;
@@ -81,7 +81,7 @@ footer{
 #main-details{
     background-color: lightseagreen;
 }
-@media only screen and (min-width:320px) and (max-width:767px) {
+@media only screen and (max-width:320px) and (max-width:767px) {
     header{
         display:flex;
         flex-direction: column;

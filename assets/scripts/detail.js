@@ -1,34 +1,30 @@
-const contenedorCard = document.getElementById("sections")
-const events = data.events
-console.log(events)
 
-const param = location.search
-console.log(param)
+  //  await fetch('https://mindhub-xj03.onrender.com/api/amazing')
+  fetch('https://mindhub-xj03.onrender.com/api/amazing')
+  .then(response => response.json())
+  .then(datosApis => {
+    eventos = datosApis.events
+    console.log(eventos);
+    const queryString = location.search
+    let params = new URLSearchParams(queryString)
+    const id = params.get("id")
+    Detalle(id,eventos)
+  })
+  .catch(error => console.log(error.message))
 
-const paramEvent = new URLSearchParams(param)
-console.log(paramEvent)
-
-const idDetails = paramEvent.get("id")
-console.log(idDetails)
-
-let unicEven = events.find(event => event._id === idDetails )
-console.log(unicEven);
-
-
-
-function cardsDetails(html, event) {
-  html.innerHTML =  `<div class='card bg-dark text-white'>
-  <img src='${event.image}' class='card-img-top p-1' alt='...'>
-  <div class='card-body d-flex align-items-center flex-wrap justify-content-center'>
-    <h4 class='card-title w-100 text-center '>${event.name}</h4>
-    <p class="card-text">${event.description}</p>
-  </div>
-    <div class='card-footer d-flex  align-items-center p-2 flex-wrap'>
-    <p class='d-flex w-50' >Price: ${event.price}</p>
-    <p class='d-flex w-50' >Assistance: ${event.assistance}</p>
-    <p class='d-flex w-50' >Place: ${event.place}</p>
-    <p class='d-flex w-50' >Category: ${event.category}</p>
-    </div>
-</div>'`
-}
-cardsDetails(contenedorCard,unicEven) 
+function Detalle(id, eventos) {
+  const evento = eventos.find(data => data._id == id)
+  const contenedorCard = document.querySelector("#cards2")
+  contenedorCard.innerHTML = `<div class='card' style='width:30rem;'>
+     <img src='${evento.image}' class='card-img-top' alt='...' id='img_detalles'>
+     <div class='card-body bg-primary'>
+       <h5 class='card-title fs-2 text-center'>${evento.name}</h5>
+       <p class='card-text fs-4'>${evento.description}</p>
+     </div>
+    <ul class='list-group list-group-flush'>
+       <li class='list-group-item bg-info fs-5'>Category: ${evento.category}</li>
+       <li class='list-group-item bg-info fs-5'>Place: ${evento.place}</li>
+       <li class='list-group-item bg-info fs-5'>Price: ${evento.price}</li>
+     </ul>
+</div>`
+  }

@@ -1,76 +1,92 @@
-const containerUpcoming = document.getElementById("past")
-const eventsArray = data.events
-const date = data.currentDate
-let categoriasRepetidas = eventsArray.map(eventos => eventos.category)
-let categoriasNoRepeat = Array.from(new Set(categoriasRepetidas))
+const container = document.getElementById('past')
+const htmlChecks = document.getElementById('inputCont')
 
-function crearInputs(categorias) {
-  return `<label class="btn btn-success">${categorias}
-  <input type="checkbox" class=""  name="options" id="${categorias}" value="${categorias}"></label>`
-}
-function pintarInputs(array, lugar) {
-  for (let categorias of array) {
-    lugar.innerHTML += crearInputs(categorias)
-  }
-}
+fetch('https://mindhub-xj03.onrender.com/api/amazing')
+    .then(resonse=> resonse.json())
+    .then(dataApis => {
+      let events = dataApis.events
+      const date= dataApis.currentDate
+        let repeatCategories = events.map(event => event.category)
+        let categories = Array.from(new Set(repeatCategories))
+      showCards(events,date, container)
+      showCheckBoxs(categories, htmlChecks)
+      const searchInput = document.getElementById("search")
 
-function crearCards(elemento) {
-   return ` <div class="card bg-dark text-white ">
-   <img src="${elemento.image}" class="card-img-top p-1" alt="...">
-   <div class="card-body">
-     <h5 class="card-title">${elemento.name}</h5>
-     <p class="card-text">${elemento.description}</p>
-     <div class="d-flex justify-content-between align-items-center">
-       <p>Price: ${elemento.price}</p>
-       <a href="../pages/details.html?id=${elemento._id}" class=" btn btn-primary">Details</a>
-     </div>
-   </div>
- </div> ` 
-}
 
-function pintarCards(array,date,container) {
-    for (const event of array ) {
-      if (event.date < date) {
-        container.innerHTML+=crearCards(event)
-     }
+        //filtercheck
+        htmlChecks.addEventListener('change', () => {
+            container.innerHTML = ''
+            let catFiltro=[]
+            let checkSeleccionado = document.querySelectorAll('input[type="checkbox"]:checked')
+            checkSeleccionado.forEach(function(inputs) {
+                catFiltro.push(inputs.value)
+                console.log(catFiltro);
+               })
+            let filter = filterCrossed(events, catFiltro, searchInput.value)
+            showCards(filter,date,container)
+        })
+        searchInput.addEventListener('keyup', () => {
+             container.innerHTML = ''
+            let catFiltro=[]
+            let checkSeleccionado = document.querySelectorAll('input[type="checkbox"]:checked')
+            checkSeleccionado.forEach(inputs=>catFiltro.push(inputs.value)  
+               )
+            let filter = filterCrossed(events, catFiltro, searchInput.value)
+            console.log(searchInput.value);
+            showCards(filter,date,container)
+        })
+    })
+
+
+function cards(event) {
+      return `<div class='card bg-dark text-white'>
+      <img src='${event.image}' class='card-img-top p-1' alt='...'>
+      <div class='card-body d-flex align-items-center flex-wrap justify-content-center'>
+        <h4 class='card-title w-100 text-center '>${event.name}</h4>
+        <p class="card-text">${event.description}</p>
+      </div>
+        <div class='card-footer d-flex justify-content-around align-items-center p-2'>
+        <p>Price: ${event.price}</p>
+          <a href="./assets/pages/details.html?id=${event._id}" class="btn btn-primary ">Details</a>
+        </div>
+    </div>'`
+  }  
+function showCards(arrayEvent,date, htmlContainer) {
+    let card = ''
+    if (arrayEvent == '') {
+        card += `<p class='display-1'> ERROR IN FILTER</p>`
+        htmlContainer.innerHTML+= card
+    } else {
+        htmlContainer.innerHTML += ''
+      for (const event of arrayEvent) {
+        if (event.date<= date) {
+          htmlContainer.innerHTML += cards(event)
+        }
+        }
     }
 }
-const inputsCheck = document.getElementById('inputs')
-
-pintarInputs(categoriasNoRepeat,inputsCheck)
-pintarCards(eventsArray, date, containerUpcoming)
-
-
-const searchInput = document.getElementById("search")
-
-function mostrarValor(input) {
-  let valorSearch = input.value.toLowerCase()
-  console.log(valorSearch);
-  return valorSearch
+function checkboxs(listCategories) {
+    return `<label class="btn btn-success">${listCategories}
+    <input type="checkbox" class="checkboxs"  name="options" id="inputs" value="${listCategories}"></label>`
+}
+function showCheckBoxs(list, htmlCont) {
+    for (const categorie of list) {
+        htmlCont.innerHTML +=checkboxs(categorie)
+    }
 }
 
-inputsCheck.addEventListener("change", () => {
-  containerUpcoming.innerHTML = ''
-  filtroCheck(eventsArray,containerUpcoming)
-})
+function filterCheck(listEvents,categoria) {
+    if (categoria == '') {
+      return listEvents
+    }
+    return aux = listEvents.filter(event => categoria.includes(event.category)|| categoria.includes(''))
+}
 
-searchInput.addEventListener('keyup', () => {
-  containerUpcoming.innerHTML = ''
-  let value = mostrarValor(searchInput)
-  console.log(value)
-  let evento = eventsArray.filter(event => event.name.toLowerCase().includes(value))
-  pintarCards(evento,date,containerUpcoming)
-})
-
-function filtroCheck(array,ubicacionHTML) {
-  ubicacionHTML.innerHTML=''
-  let catFiltro = []
-  let checkSeleccionado = document.querySelectorAll('input[type="checkbox"]:checked')
-  checkSeleccionado.forEach(function(inputs) {
-  catFiltro.push(inputs.value)
-  console.log(catFiltro);
- })
-  let segundofiltro = array.filter(event =>catFiltro.includes(event.category)||catFiltro.length == 0)
-  pintarCards(segundofiltro,date,ubicacionHTML)
-  return segundofiltro
-} 
+function filterSearch(list, text) {
+    return list.filter(event=>event.name.toLowerCase().includes(text.toLowerCase()))
+}
+function filterCrossed(listaEVent,categorie,text) {
+    let checkF = filterCheck(listaEVent, categorie)
+    let searchSearc = filterSearch(checkF, text)
+    return searchSearc
+}

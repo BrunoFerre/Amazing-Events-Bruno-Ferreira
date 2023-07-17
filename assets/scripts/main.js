@@ -1,6 +1,6 @@
 const containerCards = document.getElementById("container")
 const events = data.events
-const htmlChecks = document.getElementById('inputs')
+const htmlChecks = document.getElementById('inputCont')
 let categoriasRepetidas = events.map(eventos => eventos.category)
 let categoriasNoRepeat = Array.from(new Set(categoriasRepetidas))
 
@@ -13,7 +13,7 @@ function crearCards(eventos) {
     </div>
       <div class='card-footer d-flex justify-content-around align-items-center p-2'>
       <p>Price: ${eventos.price}</p>
-        <a href="./assets/pages/details.html?id=${eventos._id}" class="btn btn-primary ">Details</a>
+        <a href="./../pages/details.html?id=${eventos._id}" class="btn btn-primary ">Details</a>
       </div>
   </div>'`
 }
@@ -43,7 +43,6 @@ function pintarInputs(array, lugar) {
 pintarInputs(categoriasNoRepeat, htmlChecks)
 pintarCards(events, containerCards)
 
-const searchInput = document.getElementById("search")
 const inputsCheck = document.getElementById('inputs')
 
 
@@ -65,8 +64,7 @@ searchInput.addEventListener('keyup', () => {
   pintarCards(evento, containerCards)
 })
 
-function filtroCheck(array,ubicacionHTML) {
-  ubicacionHTML.innerHTML=''
+function filtroCheck(array,catFiltro) {
   let catFiltro = []
   let checkSeleccionado = document.querySelectorAll('input[type="checkbox"]:checked')
   checkSeleccionado.forEach(function(inputs) {
