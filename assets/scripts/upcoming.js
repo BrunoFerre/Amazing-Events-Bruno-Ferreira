@@ -4,16 +4,13 @@ const htmlChecks = document.getElementById('inputCont')
 fetch('https://mindhub-xj03.onrender.com/api/amazing')
     .then(resonse=> resonse.json())
     .then(dataApis => {
-      
         let events = dataApis.events   
         const date = dataApis.currentDate
-
-
         const upEvent = events.filter(event => event.date >= date)
-        console.log(upEvent);
+        console.log(upEvent)
+        
         let repeatCategories = events.map(event => event.category)
         let categories = Array.from(new Set(repeatCategories))
-
 
         showCards(upEvent,container)
         showCheckBoxs(categories, htmlChecks)

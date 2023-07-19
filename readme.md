@@ -10,3 +10,7 @@ eventos futuros (upcoming)
 Tabla 3 
 eventos pasados (past)
 -ingresos y porcentaje de asistencia por categoría
+
+fixs
+filtros cruzados andando
+responsive page details

@@ -7,7 +7,7 @@ export function cards(event) {
   </div>
     <div class='card-footer d-flex justify-content-around align-items-center p-2'>
     <p>Price: ${event.price}</p>
-      <a href="./../assets/pages/details.html?id=${event._id}" class="btn btn-primary ">Details</a>
+      <a href="../../../assets/pages/details.html?id=${event._id}" class="btn btn-primary ">Details</a>
     </div>
 </div>'`
 }  
