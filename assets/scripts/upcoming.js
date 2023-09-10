@@ -7,7 +7,6 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
         let events = dataApis.events   
         const date = dataApis.currentDate
         const upEvent = events.filter(event => event.date >= date)
-        console.log(upEvent)
         
         let repeatCategories = events.map(event => event.category)
         let categories = Array.from(new Set(repeatCategories))
@@ -28,6 +27,7 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
             let filter = filterCrossed(upEvent, catFiltro, searchInput.value)
             showCards(filter,container)
         })
+        
         searchInput.addEventListener('keyup', () => {
              container.innerHTML = ''
             let catFiltro=[]
@@ -35,7 +35,6 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
             checkSeleccionado.forEach(inputs=>catFiltro.push(inputs.value)  
                )
             let filter = filterCrossed(upEvent, catFiltro, searchInput.value)
-            console.log(searchInput.value);
             showCards(filter,container)
         })
     })

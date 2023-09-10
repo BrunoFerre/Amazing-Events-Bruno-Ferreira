@@ -3,12 +3,6 @@ const contenedorStatsTwo = document.getElementById("menor")
 const contenedorStasThree = document.getElementById("largo")
 const $tableUp = document.getElementById('tbUp')
 const $tablePast = document.getElementById('tbPast')
-
-    
-
-
-
-
 let date; 
 let datosEvents;
 
@@ -45,7 +39,6 @@ fetch("https://mindhub-xj03.onrender.com/api/amazing")
         primerTabla(eventoMenor, contenedorStatsTwo, porcentajeTwo)
         
         segundaTable(nombreMayor, contenedorStasThree, capacidadMayor)
-        console.log(pastEVents);
         let noRepeatPast = Array.from(new Set(catRepeatPast))
         let noRepeatUp = Array.from(new Set(catRepeatUP))
 
@@ -54,7 +47,6 @@ fetch("https://mindhub-xj03.onrender.com/api/amazing")
                 category: categoria
             }
             let catEvents = pastEVents.filter(evento => evento.category == categoria)
-            console.log(catEvents);
             const revenue = catEvents.reduce((acc, act) => acc + (act.price * act.assistance), 0)
             aux.revenue = revenue
             let porcAssist = catEvents.reduce((acc, act) => acc + (act.assistance / (act.capacity / 100)), 0) / catEvents.length
@@ -67,12 +59,9 @@ fetch("https://mindhub-xj03.onrender.com/api/amazing")
                 category: categoria
             }
             let catEvents = upEvents.filter(evento => evento.category == categoria)
-            console.log(catEvents);
             const revenue = catEvents.reduce((acc, act) => acc + (act.price * act.estimate), 0)
-            console.log(revenue);
             aux.revenue = revenue
             let porcEstimate = catEvents.reduce((acc, act) => acc + (act.estimate / (act.capacity / 100)), 0) / catEvents.length
-            console.log(porcEstimate);
             aux.porcEstimate=porcEstimate.toFixed(2)
             return aux
         })

@@ -7,7 +7,6 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
   .then(resonse => resonse.json())
   .then(dataApis => {
     let events = dataApis.events
-    console.log(events);
     let repeatCategories = events.map(event => event.category)
     let categories = Array.from(new Set(repeatCategories))
     showCards(events, container)
@@ -21,7 +20,6 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
       let checkSeleccionado = document.querySelectorAll('input[type="checkbox"]:checked')
       checkSeleccionado.forEach(function (inputs) {
         catFiltro.push(inputs.value)
-        console.log(catFiltro);
       })
       let filter = filterCrossed(events, catFiltro, searchInput.value)
       showCards(filter, container)
@@ -33,7 +31,6 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
       checkSeleccionado.forEach(inputs => catFiltro.push(inputs.value)
       )
       let filter = filterCrossed(events, catFiltro, searchInput.value)
-      console.log(searchInput.value);
       showCards(filter, container)
     })
   })
